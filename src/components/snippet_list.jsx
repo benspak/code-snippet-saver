@@ -20,7 +20,6 @@ export const SnippetList = () => {
     }
 
     useEffect(() => {
-      console.log("This is happening")
       chrome.storage.sync.get(['snippets'], (result) => {
           setSnippets(result.snippets);
       })

@@ -6,8 +6,6 @@ export const SnippetForm = () => {
 
   const saveSnippet = () => {
     const newSnippet = { title, code };
-    console.log(newSnippet);
-
     chrome.storage.sync.get(['snippets'], (result) => {
       const updatedSnippets = result.snippets ? [...result.snippets, newSnippet] : [newSnippet];
       chrome.storage.sync.set({ snippets: updatedSnippets });
