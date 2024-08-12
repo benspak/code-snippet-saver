@@ -18,11 +18,17 @@ const SnippetListItem = ({snippet}) => {
     const { id, title, code } = snippet
     return (
         <div className="snippet">
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
             <h2>{title}</h2>
-            <pre>{code}</pre>
-            <button class="edit-button" onClick={() => handleEdit(id, title, code)}><icon></icon></button>
-            <button class="copy-button" onClick={() => handleCopy(title, code)}>Copy</button>
-            <button class="delete-button" onClick={() => handleDelete(id)}>Delete</button>
+            <div style={{ display: 'flex', flexDirection:'row', columnGap: '5px'}}>
+              <i className="material-icons" onClick={() => handleEdit(id, title, code)}>content_copy</i>
+              <i className="material-icons" onClick={() => handleCopy(title, code)}>edit</i>
+              <i className="material-icons" onClick={() => handleDelete(id)}>delete</i>
+            </div>
+           
+          </div>
+          <pre>{code}</pre>
+            
         </div>
     )
 }

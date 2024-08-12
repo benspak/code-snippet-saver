@@ -26,6 +26,12 @@ textarea {
   height: 100px;
 }
 
+i {
+  cursor: pointer;
+  width: 20px;
+  color: #5941A9;
+}
+
 button {
   padding: 10px;
   background-color: #5941A9;
