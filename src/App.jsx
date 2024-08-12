@@ -1,4 +1,4 @@
-import React, { useEffect }from "react";
+import React from "react";
 import './styles.css'
 import { Header } from "./components/header";
 import { SnippetColumn } from "./components/snippet_column";

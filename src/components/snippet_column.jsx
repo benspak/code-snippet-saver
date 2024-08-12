@@ -6,6 +6,7 @@ export const SnippetColumn = () => {
     return (
         <>
             <SnippetForm></SnippetForm>
+            <div><h1>Your Snippets</h1></div>
             <SnippetList></SnippetList>
         </>
     )
