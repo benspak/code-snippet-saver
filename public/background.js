@@ -1,3 +1,4 @@
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ snippets: [] });
+    chrome.storage.sync.set({ snippets: [] });
 });
+  
