@@ -1,33 +1,57 @@
 import React, { useState, useEffect } from "react"
-
-const handleEdit = (id, title, code) => {}
-
-const handleCopy = (title, code) => {}
-
-const handleDelete = (id) => {
-  chrome.storage.sync.get(['snippets'], (result) => {
-    const snippets = result.snippets;
-    const keptSnippets = snippets.filter((snippet) => snippet.id != id)
-    chrome.storage.sync.set({ snippets: keptSnippets });
-  })
-}
+import { Modal } from "./modal";
+import { SnippetForm } from "./snippet_form";
 
 
 const SnippetListItem = ({ snippet }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const { id, title, code } = snippet;
 
   const handleToggleDropdown = () => {
       setIsDropdownOpen(prev => !prev);
   };
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  }
+
+  const handleCopy = (title, code) => {
+    window.navigator.clipboard.writeText(code).then(
+      // TODO: Use a better form of notification to the user that the snippet is successfully copied
+      alert(`Copied ${title} snippet`)
+    );
+  }
+
+  const handleDelete = (id) => {
+    chrome.storage.sync.get(['snippets'], (result) => {
+      const snippets = result.snippets;
+      const keptSnippets = snippets.filter((snippet) => snippet.id != id)
+      chrome.storage.sync.set({ snippets: keptSnippets });
+    })
+  }
+
+  const getInitialSnippetValues = () => {
+    return {
+      id,
+      title,
+      code
+    }
+  }
+
+  const handleModalClose = () => {
+    setIsEditing(false);
+  }
+
   return (
+    <>
+      {isEditing && <Modal onClose={handleModalClose}><SnippetForm initialValues={getInitialSnippetValues()} onEditSubmit={handleModalClose}/></Modal>}
       <div className="snippet">
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
               <h2>{title}</h2>
               <div style={{ display: 'flex', flexDirection: 'row', columnGap: '5px' }}>
-                  <i className="material-icons" onClick={() => handleEdit(id, title, code)}> content_copy </i>
-                  <i className="material-icons" onClick={() => handleCopy(title, code)}> edit</i>
+                  <i className="material-icons" onClick={() => handleCopy(title, code)} > content_copy </i>
+                  <i className="material-icons" onClick={() => handleEdit()}> edit</i>
                   <i className="material-icons" onClick={() => handleDelete(id)}>delete</i>
                   <i className="material-icons" onClick={handleToggleDropdown}>
                       {isDropdownOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
@@ -44,6 +68,7 @@ const SnippetListItem = ({ snippet }) => {
             <pre>{code}</pre>
           </div>
       </div>
+    </>
   );
 };
 

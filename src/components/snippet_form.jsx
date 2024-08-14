@@ -1,22 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import {v4 as uuidv4} from 'uuid';
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-export const SnippetForm = () => {
-  const [title, setTitle] = useState('');
-  const [code, setCode] = useState('');
+export const SnippetForm = ({ initialValues = {}, onEditSubmit}) => {
+  const { id: initialId, title: initialTitle = '', code: initialCode = '' } = initialValues;
+  const [title, setTitle] = useState(initialTitle || '');
+  const [code, setCode] = useState(initialCode || '');
 
   const saveSnippet = () => {
-    const id = uuidv4();
+    const id = initialId || uuidv4();
     const newSnippet = { id, title, code };
-    console.log(newSnippet);
+
     chrome.storage.sync.get(['snippets'], (result) => {
-      const updatedSnippets = result.snippets ? [...result.snippets, newSnippet] : [newSnippet];
+      const updatedSnippets = initialId
+        ? result.snippets.map(snippet =>
+            snippet.id === initialId ? newSnippet : snippet
+          )
+        : [...(result.snippets || []), newSnippet];
+
       chrome.storage.sync.set({ snippets: updatedSnippets });
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (onEditSubmit) {
+      onEditSubmit();
+    }
     saveSnippet();
     setTitle('');
     setCode('');
@@ -40,9 +49,10 @@ export const SnippetForm = () => {
           onChange={(e) => setCode(e.target.value)}
           required
         ></textarea>
-        <button className='md-btn' type="submit">Save Snippet</button>
+        <button className='md-btn' type="submit">
+          {initialValues.id ? 'Update Snippet' : 'Save Snippet'}
+        </button>
       </div>
-      
     </form>
   );
 };
