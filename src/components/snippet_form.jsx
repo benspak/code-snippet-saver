@@ -31,8 +31,24 @@ export const SnippetForm = ({ initialValues = {}, onEditSubmit}) => {
     setCode('');
   };
 
+  const handleLink = (e) => {
+    e.preventDefault();
+    chrome.tabs.update({
+      url: "https://popvia.com"
+    });
+  }
+
   return (
-    <form id="snippet-form" onSubmit={handleSubmit}>
+  <div className='snippet-form'>
+    {!onEditSubmit && 
+      <div className="background">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="circle circle4"></div>
+      </div>
+    }
+    <form onSubmit={handleSubmit}>
       <div className="form-column">
         <input
           type="text"
@@ -53,6 +69,10 @@ export const SnippetForm = ({ initialValues = {}, onEditSubmit}) => {
           {initialValues.id ? 'Update Snippet' : 'Save Snippet'}
         </button>
       </div>
+      <div className="tm">
+        <p>Made by <a onClick={(e) => {handleLink(e)}} className="purple-txt">PopVia.com</a></p>
+      </div>
     </form>
+    </div>
   );
 };

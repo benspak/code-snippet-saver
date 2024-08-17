@@ -45,7 +45,7 @@ const SnippetListItem = ({ snippet }) => {
 
   return (
     <>
-      {isEditing && <Modal onClose={handleModalClose}><SnippetForm initialValues={getInitialSnippetValues()} onEditSubmit={handleModalClose}/></Modal>}
+      {isEditing && <Modal onClose={handleModalClose} headerContent={`Editing Snippet: ${title}`}><SnippetForm initialValues={getInitialSnippetValues()} onEditSubmit={handleModalClose}/></Modal>}
       <div className="snippet">
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
               <h2>{title}</h2>
@@ -89,8 +89,13 @@ export const SnippetList = () => {
     }
   }, [])
 
+  if (snippets.length === 0) {
+    return null;
+  }
+
   return (
       <div className="snippets-container">
+        <div><h1>Your Snippets</h1></div>
         {snippets.map((snippet) => {
           return <SnippetListItem key={snippet.id} snippet={snippet}/>
         })}

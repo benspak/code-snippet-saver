@@ -5,7 +5,8 @@
     "description": "Save and manage your code snippets.",
     "permissions": [
       "storage",
-      "scripting"
+      "scripting",
+      "tabs"
     ],
     "action": {
       "default_popup": "index.html",
