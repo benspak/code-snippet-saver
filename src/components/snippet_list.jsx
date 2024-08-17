@@ -90,7 +90,11 @@ export const SnippetList = () => {
   }, [])
 
   if (snippets.length === 0) {
-    return null;
+    return (
+      <div className="snippets-container">
+        <h1>Create a Snippet Above!</h1>
+      </div>
+    )
   }
 
   return (
