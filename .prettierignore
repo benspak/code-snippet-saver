@@ -1,0 +1,21 @@
+# Ignore all node_modules folders:
+node_modules/
+
+# Ignore specific files:
+package-lock.json
+yarn.lock
+
+dist/
+
+# Ignore all markdown files:
+*.md
+
+# Ignore all images:
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Ignore all JSON files:
+*.json

@@ -1,0 +1,70 @@
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; 
+    pointer-events: none;
+}
+  
+.circle {
+    position: absolute;
+    right: -100px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 1;
+    background-color: #9888D8; 
+    opacity: 0;
+    animation: bubble 3s ease-out forwards;
+}
+
+  .circle1 {
+    left: 60%;
+    top: -5%;
+    width: 225px;
+    height: 225px;
+    animation-delay: 0s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circle2 {
+    left: 35%;
+    top: 24%;
+    animation-delay: 0.25s;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .circle3 {
+    left: 15%;
+    top: 10%;
+    animation-delay: 0.5s;
+    width: 125px;
+    height: 125px;
+  }
+  
+  .circle4 {
+    left: -2%;
+    top: 30%;
+    animation-delay: 0.75s;
+    width: 100px;
+    height: 100px;
+  }
+ 
+@keyframes bubble {
+    0% {
+        transform: translateX(-100vw); 
+        opacity: 0; 
+    }
+    20% {
+        opacity: 1; 
+    }
+    100% {
+        transform: translateX(0vw); 
+        opacity: 1;
+    }
+}

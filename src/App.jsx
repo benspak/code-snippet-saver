@@ -1,7 +1,7 @@
-import React, { useEffect }from "react";
-import './styles.css'
-import { Header } from "./components/header";
-import { SnippetColumn } from "./components/snippet_column";
+import React from "react";
+import './App.css'
+import { Header } from "./components/common/header";
+import { SnippetColumn } from "./components/snippet/snippet_column";
 
 
 function App() {

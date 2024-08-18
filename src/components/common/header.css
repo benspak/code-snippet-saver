@@ -1,0 +1,10 @@
+.header {
+    padding: 0px 16px;
+    background-color: black;
+    color: white;
+  }
+  
+  .header-title {
+    position: relative;
+    z-index: 2; /* To be above bubbling background */
+  }
