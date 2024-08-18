@@ -53,8 +53,12 @@
     background-color: #5941A9;
     color: white;
   }
-  
-  
+
+  .modal-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
   
   .modal-footer {
     padding: 8px 16px;
